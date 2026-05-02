@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyGrader Lessons</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: #dbeafe;
+      padding: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    nav button:hover {
+      background: #1d4ed8;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .section {
+      display: none;
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      color: #1e3a8a;
+    }
+
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .card button, .primary-btn {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #16a34a;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .card button:hover, .primary-btn:hover {
+      background: #15803d;
+    }
+
+    .lesson-viewer {
+      margin-top: 20px;
+      text-align: center;
+      background: #111827;
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .lesson-viewer img {
+      max-width: 100%;
+      max-height: 650px;
+      border-radius: 8px;
+      background: white;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .slide-controls {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .slide-controls button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .question-box {
+      margin-top: 20px;
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #dbeafe;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 14px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <header>
+    <h1>StudyGrader Lessons</h1>
+    <p>Online lessons using PowerPoint slide images</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('student')">Student</button>
+    <button onclick="showSection('teacher')">Teacher</button>
+    <button onclick="showSection('admin')">Admin</button>
+  </nav>
+
+  <main>
+    <section id="home" class="section active">
+      <h2>Welcome</h2>
+      <p>This free website lets students view lessons online. PowerPoint files are converted into slide images, so students do not receive the original PowerPoint file.</p>
+      <div class="warning">
+        <strong>Important:</strong> This makes downloading harder, but students can still take screenshots. Do not upload the original PowerPoint file for students.
+      </div>
+
+      <h3>Free setup</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h3>1. Convert PowerPoint</h3>
+          <p>Export your PowerPoint as PNG/JPEG images.</p>
+        </div>
+        <div class="card">
+          <h3>2. Upload to GitHub</h3>
+          <p>Put slide images inside the lessons folder.</p>
+        </div>
+        <div class="card">
+          <h3>3. View lessons</h3>
+          <p>Students open lessons inside this website.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="student" class="section">
+      <h2>Student Dashboard</h2>
+      <p>Select a lesson to begin.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Year 10 Physics: Motion</h3>
+          <p>Status: Not started</p>
+          <button onclick="startLesson('motion')">Start Lesson</button>
+        </div>
+        <div class="card">
+          <h3>Year 11 Chemistry: Atomic Structure</h3>
+          <p>Status: Not started</p>
+          <button onclick="startLesson('atomic')">Start Lesson</button>
+        </div>
+      </div>
+
+      <div id="viewer" class="lesson-viewer" style="display:none;">
+        <img id="slideImage" src="" alt="Lesson slide" draggable="false" />
+        <div class="slide-controls">
+          <button onclick="previousSlide()">Previous</button>
+          <button onclick="nextSlide()">Next</button>
+          <button onclick="markComplete()">Mark Complete</button>
+        </div>
+      </div>
+
+      <div id="questionBox" class="question-box" style="display:none;">
+        <h3>Lesson Question</h3>
+        <p id="questionText"></p>
+        <textarea id="studentAnswer" rows="4" placeholder="Type your answer here..."></textarea>
+        <button class="primary-btn" onclick="submitAnswer()">Submit Answer</button>
+        <p id="answerMessage"></p>
+      </div>
+    </section>
+
+    <section id="teacher" class="section">
+      <h2>Teacher Dashboard</h2>
+      <p>This area can later connect to Firebase to show real student progress.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Lesson</th>
+            <th>Status</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Example Student</td>
+            <td>Year 10 Physics: Motion</td>
+            <td>Completed</td>
+            <td>8/10</td>
+          </tr>
+          <tr>
+            <td>Example Student 2</td>
+            <td>Atomic Structure</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="admin" class="section">
+      <h2>Admin Lesson Setup</h2>
+      <p>For the free GitHub version, you add lessons by uploading slide images into your GitHub folders and editing the lesson list in the code.</p>
+
+      <h3>Recommended GitHub folder structure</h3>
+      <pre>
+/lessons
+  /motion
+    slide1.png
+    slide2.png
+    slide3.png
+  /atomic
+    slide1.png
+    slide2.png
+    slide3.png
+index.html
+      </pre>
+
+      <h3>Add a new lesson</h3>
+      <p>Copy one lesson object inside the JavaScript lessonData section and change the title, slide image links and question.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>StudyGrader Lessons | Free GitHub Pages Version</p>
+  </footer>
+
+  <script>
+    const lessonData = {
+      motion: {
+        title: "Year 10 Physics: Motion",
+        slides: [
+          "lessons/motion/slide1.png",
+          "lessons/motion/slide2.png",
+          "lessons/motion/slide3.png"
+        ],
+        question: "Explain the difference between speed and velocity."
+      },
+      atomic: {
+        title: "Year 11 Chemistry: Atomic Structure",
+        slides: [
+          "lessons/atomic/slide1.png",
+          "lessons/atomic/slide2.png",
+          "lessons/atomic/slide3.png"
+        ],
+        question: "Describe the structure of an atom, including protons, neutrons and electrons."
+      }
+    };
+
+    let currentLesson = null;
+    let currentSlideIndex = 0;
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    function startLesson(lessonKey) {
+      currentLesson = lessonData[lessonKey];
+      currentSlideIndex = 0;
+      document.getElementById('viewer').style.display = 'block';
+      document.getElementById('questionBox').style.display = 'block';
+      document.getElementById('questionText').textContent = currentLesson.question;
+      document.getElementById('answerMessage').textContent = '';
+      document.getElementById('studentAnswer').value = '';
+      updateSlide();
+    }
+
+    function updateSlide() {
+      if (!currentLesson) return;
+      document.getElementById('slideImage').src = currentLesson.slides[currentSlideIndex];
+    }
+
+    function nextSlide() {
+      if (!currentLesson) return;
+      if (currentSlideIndex < currentLesson.slides.length - 1) {
+        currentSlideIndex++;
+        updateSlide();
+      }
+    }
+
+    function previousSlide() {
+      if (!currentLesson) return;
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+        updateSlide();
+      }
+    }
+
+    function submitAnswer() {
+      const answer = document.getElementById('studentAnswer').value.trim();
+      if (answer.length === 0) {
+        document.getElementById('answerMessage').textContent = 'Please type an answer before submitting.';
+        return;
+      }
+      document.getElementById('answerMessage').textContent = 'Answer submitted. In the Firebase version, this will be saved for the teacher.';
+    }
+
+    function markComplete() {
+      alert('Lesson marked complete. In the Firebase version, this will save to the student progress record.');
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if ((event.ctrlKey || event.metaKey) && ['s', 'p', 'u'].includes(event.key.toLowerCase())) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
