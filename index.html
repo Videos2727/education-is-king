@@ -1,709 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Education is King</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
     body {
+      font-family: Arial, sans-serif;
       background: #f4f6f9;
+      margin: 0;
       color: #1f2937;
     }
 
     header {
-      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      background: #1e3a8a;
       color: white;
-      padding: 28px 20px;
+      padding: 25px;
       text-align: center;
     }
 
-    header h1 {
-      font-size: 2.1rem;
-      margin-bottom: 8px;
-    }
-
     nav {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
       background: #dbeafe;
       padding: 12px;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      text-align: center;
     }
 
-    button {
+    nav button {
       padding: 10px 16px;
+      margin: 5px;
       border: none;
       border-radius: 8px;
       background: #2563eb;
       color: white;
-      cursor: pointer;
       font-weight: bold;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .green-btn {
-      background: #16a34a;
-    }
-
-    .green-btn:hover {
-      background: #15803d;
-    }
-
-    .grey-btn {
-      background: #64748b;
-    }
-
-    .grey-btn:hover {
-      background: #475569;
+      cursor: pointer;
     }
 
     main {
-      max-width: 1200px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-
-    .section {
-      display: none;
+      max-width: 1100px;
+      margin: 25px auto;
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    h2 {
-      margin-bottom: 14px;
-      color: #1e3a8a;
-    }
-
-    h3 {
-      margin-top: 14px;
-      margin-bottom: 8px;
-    }
-
-    p {
-      line-height: 1.5;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      align-items: center;
-    }
-
-    .hero-box {
-      background: #eff6ff;
-      padding: 22px;
+      padding: 25px;
       border-radius: 14px;
-      border: 1px solid #bfdbfe;
     }
 
-    .selector-panel {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin: 18px 0;
-    }
-
-    .select-card {
-      background: #f8fafc;
-      border: 2px solid #e5e7eb;
-      border-radius: 14px;
+    .card {
+      border: 1px solid #ddd;
       padding: 18px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .select-card:hover {
-      border-color: #2563eb;
-      transform: translateY(-2px);
-    }
-
-    .select-card.active-card {
-      border-color: #2563eb;
-      background: #dbeafe;
-    }
-
-    .breadcrumb {
-      background: #f1f5f9;
-      padding: 12px;
-      border-radius: 10px;
-      margin: 16px 0;
-      font-weight: bold;
-      color: #334155;
-    }
-
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .lesson-card {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    }
-
-    .lesson-card small {
-      display: inline-block;
-      background: #e0f2fe;
-      color: #075985;
-      padding: 5px 8px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .lesson-viewer {
-      margin-top: 20px;
-      text-align: center;
-      background: #111827;
-      padding: 16px;
-      border-radius: 14px;
-    }
-
-    .lesson-viewer img {
-      max-width: 100%;
-      max-height: 660px;
-      border-radius: 8px;
-      background: white;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .slide-title {
-      color: white;
-      margin-bottom: 12px;
-      font-weight: bold;
-    }
-
-    .slide-controls {
-      margin-top: 14px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .question-box {
-      margin-top: 20px;
-      background: #eff6ff;
-      border-left: 5px solid #2563eb;
-      padding: 16px;
-      border-radius: 10px;
-    }
-
-    textarea, input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-    }
-
-    th, td {
-      border: 1px solid #e5e7eb;
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background: #dbeafe;
-    }
-
-    pre {
-      background: #0f172a;
-      color: #e5e7eb;
-      padding: 16px;
       border-radius: 12px;
-      overflow-x: auto;
-      margin-top: 10px;
+      margin: 15px 0;
+      background: #f8fafc;
+    }
+
+    .card button {
+      background: #16a34a;
+      color: white;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    iframe {
+      width: 100%;
+      height: 650px;
+      border: none;
+      margin-top: 20px;
+      border-radius: 10px;
     }
 
     .warning {
       background: #fff7ed;
       border-left: 5px solid #f97316;
-      padding: 14px;
+      padding: 12px;
+      margin-top: 15px;
       border-radius: 8px;
-      margin-top: 16px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 18px;
-      color: #64748b;
     }
   </style>
 </head>
-<body oncontextmenu="return false">
+
+<body>
   <header>
     <h1>Education is King</h1>
-    <p>Online lessons by year group, subject and topic</p>
+    <p>Online PowerPoint lessons by year group and topic</p>
   </header>
 
   <nav>
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('student')">Student Lessons</button>
-    <button onclick="showSection('teacher')">Teacher Dashboard</button>
-    <button onclick="showSection('admin')">Admin Setup</button>
+    <button onclick="showHome()">Home</button>
+    <button onclick="showLessons()">Lessons</button>
   </nav>
 
-  <main>
-    <section id="home" class="section active">
-      <div class="hero">
-        <div>
-          <h2>Welcome</h2>
-          <p>This website lets students access lessons by year group, subject and topic. PowerPoint lessons are shown as slide images, so students do not receive the original PowerPoint file.</p>
-          <div class="warning">
-            <strong>Important:</strong> This free version makes downloading harder, but students can still screenshot slides. Do not upload original PowerPoint files for students.
-          </div>
-        </div>
-        <div class="hero-box">
-          <h3>How students use it</h3>
-          <p>1. Choose year group</p>
-          <p>2. Choose subject</p>
-          <p>3. Choose topic lesson</p>
-          <p>4. View slides and answer questions</p>
-        </div>
-      </div>
-    </section>
+  <main id="content">
+    <h2>Welcome</h2>
+    <p>This website allows students to view PowerPoint lessons online.</p>
 
-    <section id="student" class="section">
-      <h2>Student Lessons</h2>
-      <p>Select your year group, then subject, then topic.</p>
-
-      <div class="breadcrumb" id="breadcrumb">Choose a year group to begin.</div>
-
-      <h3>1. Choose Year Group</h3>
-      <div id="yearButtons" class="selector-panel"></div>
-
-      <div id="subjectArea" class="hidden">
-        <h3>2. Choose Subject</h3>
-        <div id="subjectButtons" class="selector-panel"></div>
-      </div>
-
-      <div id="lessonArea" class="hidden">
-        <h3>3. Choose Topic Lesson</h3>
-        <div id="lessonList" class="lesson-grid"></div>
-      </div>
-
-      <div id="viewer" class="lesson-viewer hidden">
-        <div class="slide-title" id="slideTitle"></div>
-        <img id="slideImage" src="" alt="Lesson slide" draggable="false" />
-        <div class="slide-controls">
-          <button class="grey-btn" onclick="previousSlide()">Previous</button>
-          <button onclick="nextSlide()">Next</button>
-          <button class="green-btn" onclick="markComplete()">Mark Complete</button>
-        </div>
-      </div>
-
-      <div id="questionBox" class="question-box hidden">
-        <h3>Lesson Question</h3>
-        <p id="questionText"></p>
-        <textarea id="studentAnswer" rows="4" placeholder="Type your answer here..."></textarea>
-        <button class="green-btn" onclick="submitAnswer()">Submit Answer</button>
-        <p id="answerMessage"></p>
-      </div>
-    </section>
-
-    <section id="teacher" class="section">
-      <h2>Teacher Dashboard</h2>
-      <p>This free GitHub version is a display website. Later, Firebase can be added for student login, different classes, assigned lessons and progress tracking.</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Class</th>
-            <th>Year Group</th>
-            <th>Subject</th>
-            <th>Assigned Topic</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>10.1</td>
-            <td>Year 10</td>
-            <td>Physics</td>
-            <td>Motion</td>
-            <td>Example only</td>
-          </tr>
-          <tr>
-            <td>11 Chemistry</td>
-            <td>Year 11</td>
-            <td>Chemistry</td>
-            <td>Atomic Structure</td>
-            <td>Example only</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="admin" class="section">
-      <h2>Admin Setup</h2>
-      <p>To add lessons, convert PowerPoints into images and upload the images into matching GitHub folders.</p>
-
-      <h3>Recommended folder structure</h3>
-      <pre>/lessons
-  /year7
-    /science
-      /cells
-        slide1.png
-        slide2.png
-  /year8
-    /science
-      /energy
-        slide1.png
-        slide2.png
-  /year10
-    /physics
-      /motion
-        slide1.png
-        slide2.png
-  /year11
-    /chemistry
-      /atomic-structure
-        slide1.png
-        slide2.png
-index.html</pre>
-
-      <h3>Class structure for later Firebase upgrade</h3>
-      <pre>Year 10
-  Class 10.1
-    Assigned lessons: Motion, Forces, Electricity
-  Class 10.2
-    Assigned lessons: Motion, Energy
-  Class 10.3
-    Assigned lessons: Revision only</pre>
-    </section>
+    <div class="warning">
+      Important: Because the PowerPoints are stored in GitHub, students may still be able to download them if they find the file link.
+    </div>
   </main>
 
-  <footer>
-    <p>Education is King | Free GitHub Pages Version</p>
-  </footer>
-
   <script>
+    const websiteBase = "https://YOUR-USERNAME.github.io/education-is-king/";
+
     const lessonData = {
-      "Year 7": {
-        "Science": [
-          {
-            title: "Cells",
-            topic: "Biology",
-            slides: [
-              "lessons/year7/science/cells/slide1.png",
-              "lessons/year7/science/cells/slide2.png",
-              "lessons/year7/science/cells/slide3.png"
-            ],
-            question: "What is the function of the cell membrane?"
-          }
-        ]
-      },
-      "Year 8": {
-        "Science": [
-          {
-            title: "Energy Transfers",
-            topic: "Physics",
-            slides: [
-              "lessons/year8/science/energy/slide1.png",
-              "lessons/year8/science/energy/slide2.png",
-              "lessons/year8/science/energy/slide3.png"
-            ],
-            question: "Describe one example of an energy transfer."
-          }
-        ]
-      },
-      "Year 9": {
-        "Science": [
-          {
-            title: "Chemical Reactions",
-            topic: "Chemistry",
-            slides: [
-              "lessons/year9/science/chemical-reactions/slide1.png",
-              "lessons/year9/science/chemical-reactions/slide2.png",
-              "lessons/year9/science/chemical-reactions/slide3.png"
-            ],
-            question: "What are the signs that a chemical reaction has occurred?"
-          }
-        ]
-      },
       "Year 10": {
         "Physics": [
           {
             title: "Motion",
             topic: "Physics",
-            slides: [
-              "lessons/year10/physics/motion/slide1.png",
-              "lessons/year10/physics/motion/slide2.png",
-              "lessons/year10/physics/motion/slide3.png"
-            ],
+            ppt: "powerpoints/year10/physics/motion.pptx",
             question: "Explain the difference between speed and velocity."
-          },
-          {
-            title: "Forces",
-            topic: "Physics",
-            slides: [
-              "lessons/year10/physics/forces/slide1.png",
-              "lessons/year10/physics/forces/slide2.png",
-              "lessons/year10/physics/forces/slide3.png"
-            ],
-            question: "Explain how unbalanced forces affect the motion of an object."
-          }
-        ],
-        "Chemistry": [
-          {
-            title: "Atomic Structure",
-            topic: "Chemistry",
-            slides: [
-              "lessons/year10/chemistry/atomic-structure/slide1.png",
-              "lessons/year10/chemistry/atomic-structure/slide2.png",
-              "lessons/year10/chemistry/atomic-structure/slide3.png"
-            ],
-            question: "Describe the structure of an atom."
-          }
-        ],
-        "Biology": [
-          {
-            title: "Genetics",
-            topic: "Biology",
-            slides: [
-              "lessons/year10/biology/genetics/slide1.png",
-              "lessons/year10/biology/genetics/slide2.png",
-              "lessons/year10/biology/genetics/slide3.png"
-            ],
-            question: "What is the difference between a gene and a chromosome?"
-          }
-        ]
-      },
-      "Year 11": {
-        "Chemistry": [
-          {
-            title: "Atomic Structure",
-            topic: "Chemistry",
-            slides: [
-              "lessons/year11/chemistry/atomic-structure/slide1.png",
-              "lessons/year11/chemistry/atomic-structure/slide2.png",
-              "lessons/year11/chemistry/atomic-structure/slide3.png"
-            ],
-            question: "Explain how electron arrangement relates to the periodic table."
-          }
-        ],
-        "Physics": [
-          {
-            title: "Linear Motion",
-            topic: "Physics",
-            slides: [
-              "lessons/year11/physics/linear-motion/slide1.png",
-              "lessons/year11/physics/linear-motion/slide2.png",
-              "lessons/year11/physics/linear-motion/slide3.png"
-            ],
-            question: "Explain the relationship between displacement, velocity and acceleration."
-          }
-        ]
-      },
-      "Year 12": {
-        "Chemistry": [
-          {
-            title: "Equilibrium",
-            topic: "Chemistry",
-            slides: [
-              "lessons/year12/chemistry/equilibrium/slide1.png",
-              "lessons/year12/chemistry/equilibrium/slide2.png",
-              "lessons/year12/chemistry/equilibrium/slide3.png"
-            ],
-            question: "Use Le Chatelier's principle to explain how a system responds to stress."
-          }
-        ],
-        "Physics": [
-          {
-            title: "Electric Fields",
-            topic: "Physics",
-            slides: [
-              "lessons/year12/physics/electric-fields/slide1.png",
-              "lessons/year12/physics/electric-fields/slide2.png",
-              "lessons/year12/physics/electric-fields/slide3.png"
-            ],
-            question: "Describe the electric field around a positive point charge."
           }
         ]
       }
     };
 
-    let selectedYear = null;
-    let selectedSubject = null;
-    let currentLesson = null;
-    let currentSlideIndex = 0;
-
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
+    function showHome() {
+      document.getElementById("content").innerHTML = `
+        <h2>Welcome</h2>
+        <p>This website allows students to view PowerPoint lessons online.</p>
+        <div class="warning">
+          Important: Because the PowerPoints are stored in GitHub, students may still be able to download them if they find the file link.
+        </div>
+      `;
     }
 
-    function loadYearButtons() {
-      const yearButtons = document.getElementById('yearButtons');
-      yearButtons.innerHTML = '';
+    function showLessons() {
+      let html = "<h2>Lessons</h2>";
 
-      Object.keys(lessonData).forEach(year => {
-        const card = document.createElement('div');
-        card.className = 'select-card';
-        card.innerHTML = `<h3>${year}</h3><p>View available subjects and lessons.</p>`;
-        card.onclick = () => selectYear(year, card);
-        yearButtons.appendChild(card);
-      });
-    }
+      for (const year in lessonData) {
+        html += `<h3>${year}</h3>`;
 
-    function selectYear(year, clickedCard) {
-      selectedYear = year;
-      selectedSubject = null;
-      currentLesson = null;
+        for (const subject in lessonData[year]) {
+          html += `<h4>${subject}</h4>`;
 
-      document.querySelectorAll('#yearButtons .select-card').forEach(card => card.classList.remove('active-card'));
-      clickedCard.classList.add('active-card');
-
-      document.getElementById('breadcrumb').textContent = `${year} selected. Now choose a subject.`;
-      document.getElementById('subjectArea').classList.remove('hidden');
-      document.getElementById('lessonArea').classList.add('hidden');
-      document.getElementById('viewer').classList.add('hidden');
-      document.getElementById('questionBox').classList.add('hidden');
-
-      loadSubjectButtons();
-    }
-
-    function loadSubjectButtons() {
-      const subjectButtons = document.getElementById('subjectButtons');
-      subjectButtons.innerHTML = '';
-
-      Object.keys(lessonData[selectedYear]).forEach(subject => {
-        const card = document.createElement('div');
-        card.className = 'select-card';
-        card.innerHTML = `<h3>${subject}</h3><p>Open ${selectedYear} ${subject} lessons.</p>`;
-        card.onclick = () => selectSubject(subject, card);
-        subjectButtons.appendChild(card);
-      });
-    }
-
-    function selectSubject(subject, clickedCard) {
-      selectedSubject = subject;
-      currentLesson = null;
-
-      document.querySelectorAll('#subjectButtons .select-card').forEach(card => card.classList.remove('active-card'));
-      clickedCard.classList.add('active-card');
-
-      document.getElementById('breadcrumb').textContent = `${selectedYear} → ${subject}. Now choose a topic lesson.`;
-      document.getElementById('lessonArea').classList.remove('hidden');
-      document.getElementById('viewer').classList.add('hidden');
-      document.getElementById('questionBox').classList.add('hidden');
-
-      loadLessonList();
-    }
-
-    function loadLessonList() {
-      const lessonList = document.getElementById('lessonList');
-      lessonList.innerHTML = '';
-
-      lessonData[selectedYear][selectedSubject].forEach((lesson, index) => {
-        const card = document.createElement('div');
-        card.className = 'lesson-card';
-        card.innerHTML = `
-          <small>${lesson.topic}</small>
-          <h3>${lesson.title}</h3>
-          <p>${lesson.slides.length} slides</p>
-          <button class="green-btn" onclick="startLesson(${index})">Start Lesson</button>
-        `;
-        lessonList.appendChild(card);
-      });
-    }
-
-    function startLesson(index) {
-      currentLesson = lessonData[selectedYear][selectedSubject][index];
-      currentSlideIndex = 0;
-
-      document.getElementById('viewer').classList.remove('hidden');
-      document.getElementById('questionBox').classList.remove('hidden');
-      document.getElementById('questionText').textContent = currentLesson.question;
-      document.getElementById('answerMessage').textContent = '';
-      document.getElementById('studentAnswer').value = '';
-      document.getElementById('breadcrumb').textContent = `${selectedYear} → ${selectedSubject} → ${currentLesson.title}`;
-
-      updateSlide();
-      document.getElementById('viewer').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function updateSlide() {
-      if (!currentLesson) return;
-      document.getElementById('slideImage').src = currentLesson.slides[currentSlideIndex];
-      document.getElementById('slideTitle').textContent = `${currentLesson.title} | Slide ${currentSlideIndex + 1} of ${currentLesson.slides.length}`;
-    }
-
-    function nextSlide() {
-      if (!currentLesson) return;
-      if (currentSlideIndex < currentLesson.slides.length - 1) {
-        currentSlideIndex++;
-        updateSlide();
+          lessonData[year][subject].forEach((lesson, index) => {
+            html += `
+              <div class="card">
+                <h3>${lesson.title}</h3>
+                <p><strong>Topic:</strong> ${lesson.topic}</p>
+                <p><strong>Question:</strong> ${lesson.question}</p>
+                <button onclick="openLesson('${year}', '${subject}', ${index})">Open Lesson</button>
+              </div>
+            `;
+          });
+        }
       }
+
+      document.getElementById("content").innerHTML = html;
     }
 
-    function previousSlide() {
-      if (!currentLesson) return;
-      if (currentSlideIndex > 0) {
-        currentSlideIndex--;
-        updateSlide();
-      }
+    function openLesson(year, subject, index) {
+      const lesson = lessonData[year][subject][index];
+      const pptUrl = websiteBase + lesson.ppt;
+      const viewerUrl = "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(pptUrl);
+
+      document.getElementById("content").innerHTML = `
+        <h2>${lesson.title}</h2>
+        <p><strong>${year} - ${subject}</strong></p>
+        <p><strong>Question:</strong> ${lesson.question}</p>
+        <iframe src="${viewerUrl}"></iframe>
+      `;
     }
-
-    function submitAnswer() {
-      const answer = document.getElementById('studentAnswer').value.trim();
-      if (answer.length === 0) {
-        document.getElementById('answerMessage').textContent = 'Please type an answer before submitting.';
-        return;
-      }
-      document.getElementById('answerMessage').textContent = 'Answer submitted. Later, Firebase can save this for the teacher.';
-    }
-
-    function markComplete() {
-      alert('Lesson marked complete. Later, Firebase can save this to the student progress record.');
-    }
-
-    document.addEventListener('keydown', function(event) {
-      if ((event.ctrlKey || event.metaKey) && ['s', 'p', 'u'].includes(event.key.toLowerCase())) {
-        event.preventDefault();
-      }
-    });
-
-    loadYearButtons();
   </script>
 </body>
 </html>
